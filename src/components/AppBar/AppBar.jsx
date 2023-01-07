@@ -11,7 +11,7 @@ const navItems = [
 
 export const AppBar = () => {
     return (
-        <Box p='16px' bg='#b6b6b6'>
+        <Box p='32px' bg='#b6b6b6'>
             <StyledNavBox>
                 {navItems.map(({ href, text }) =>
                     <li key={href}>

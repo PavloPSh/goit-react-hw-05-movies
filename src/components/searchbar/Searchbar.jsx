@@ -1,5 +1,13 @@
 import { useState } from "react"
 
+import { FcSearch } from "react-icons/fc";
+
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { Box } from "Box";
+import { SearchButton,SearchInput } from "./SearchBar.styled";
+
 export const Searchbar = ({value, onSubmit}) => {
 
     const [search, setSearch] = useState(value);
@@ -14,7 +22,7 @@ export const Searchbar = ({value, onSubmit}) => {
         e.preventDefault();
 
             if (search.trim() === '') {
-                return window.alert('nope')
+                return toast.error('Try to find something...');
             };
 
         onSubmit(search.trim());
@@ -23,8 +31,8 @@ export const Searchbar = ({value, onSubmit}) => {
 
     return(
         <>
-            <form onSubmit={handleSubmit}>
-                <input
+            <Box as='form' pt='32px' display='flex' justifyContent='center' onSubmit={handleSubmit}>
+                <SearchInput
                     onChange={handleChange}
                     name='search'
                     value={search}
@@ -34,8 +42,8 @@ export const Searchbar = ({value, onSubmit}) => {
                     autoFocus
                     />
                 
-                <button type="submit">Search</button>
-            </form>
+                <SearchButton type="submit"><FcSearch size='24px'></FcSearch></SearchButton>
+            </Box>
         </>
     )
 }

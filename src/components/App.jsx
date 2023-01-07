@@ -1,22 +1,28 @@
+import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { Layout } from "./layout/Layout";
-import { Home } from "pages/homePage/HomePage";
-import { MoviesPage } from "pages/moviesPage/MoviesPage";
-import { MoviesDetailsPage } from "pages/detailsPage/MoviesDetailsPage";
-import { Cast } from "./cast/Cast";
-import { Reviews } from "./reviews/Reviews";
-
 import { GlobalStyles } from "GlobalStyles";
+import { ToastContainer } from "react-toastify";
+
+import { Layout } from "./layout/Layout";
+
+const HomePage = lazy(() => import('../pages/homePage/HomePage'));
+const MoviesPage = lazy(() => import('../pages/moviesPage/MoviesPage'));
+const MoviesDetailsPage = lazy(() => import('../pages/detailsPage/MoviesDetailsPage'));
+const Cast = lazy(() => import('../components/cast/Cast'));
+const Reviews = lazy(() => import('../components/reviews/Reviews'));
+const PageNotFound = lazy(()=>import('../pages/notFoundPage/PageNotFound'))
+
 
 
 export const App = () => {
   return (
     <>
       <Routes>
+
         <Route path="/" element={<Layout />}>
 
-          <Route index element={<Home />} />
+          <Route index element={<HomePage />} />
 
           <Route path="movies" element={<MoviesPage />} />
 
@@ -25,11 +31,14 @@ export const App = () => {
             <Route path="reviews" element={<Reviews />} />
           </Route>
 
+          <Route path="*" element={<PageNotFound />} />
+
         </Route>  
+
       </Routes>
       
+      <ToastContainer autoClose={1500}/>
       <GlobalStyles />
-
     </>
   );
 };

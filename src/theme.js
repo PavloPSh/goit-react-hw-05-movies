@@ -47,6 +47,7 @@ export const theme = {
   },
   shadows: {
     normal: '10px 5px 5px gray',
-    slim: '2px 2px 2px gray'
+    slim: '2px 2px 2px gray',
+    text: '1px 1px 1px gray',
   }
 };

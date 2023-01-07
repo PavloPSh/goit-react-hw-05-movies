@@ -6,7 +6,7 @@ import { Loader } from "components/loader/Loader";
 import { Box } from "Box";
 
 
-export const Home = () => {
+const HomePage = () => {
 
     const [tranding, setTranding] = useState([]);
     const [error, setError] = useState(null);
@@ -18,6 +18,7 @@ export const Home = () => {
         const getTranding = async () => {
 
             setLoading(true);
+            setError(null);
 
             try {
                 const data = await getTrandingFilms();
@@ -33,17 +34,19 @@ export const Home = () => {
     }, []);
 
 
-    const isTranding = tranding.length !== 0;
+    const isTranding = tranding.length > 0;
+    const isNoTranding = tranding.length === 0 && error && !loading;
 
     return (
         <Box p='32px' pt='0' >
             
-            <h2>Tranding today:</h2>
+            <Box as='h2' pt='32px'>Tranding today:</Box>
             {loading && <Loader />}
-            {error && <div>Something went wrong...</div>}
+            {isNoTranding && <Box as='h3' display='flex' justifyContent='center' pt='32px'>Something went wrong...</Box>}
             {isTranding && <TrandingList data={tranding} />}
-            
-            
+             
         </Box>
     )
 };
+
+export default HomePage;

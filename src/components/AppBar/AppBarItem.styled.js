@@ -6,8 +6,13 @@ export const StyledNavLink = styled(NavLink)`
     &.active{
         color: ${p => p.theme.colors.primary};
     }
+    &:hover{
+        text-shadow: ${p=>p.theme.shadows.slim};
+    }
     text-decoration: none;
     text-transform: uppercase;
+    font-weight: 700;
+    font-size: 16px;
 `;
 
 export const StyledNavBox = styled.ul`

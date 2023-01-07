@@ -3,9 +3,12 @@ import { useParams } from "react-router-dom";
 import { getFilmReview } from "services/filmApi";
 import { Loader } from "components/loader/Loader";
 
+import { Box } from "Box";
+import { ReviewItem } from "./Reviews.styled";
 
 
-export const Reviews = () => {
+
+const Reviews = () => {
 
     const [review, setReview] = useState([]);
     const [error, setError] = useState(null);
@@ -33,18 +36,25 @@ export const Reviews = () => {
 
     }, [movieId]);
 
-    const isReviews = review.length === 0 || error;
+    console.log(review);
+
+    const isReviews = review.length !== 0;
+    const isNoReviews = review.length === 0 && error && !loading;
 
     return (
         <>
             {loading && <Loader />}
-            {isReviews && <p>Ooops...</p>}
-            <ul>
-                {review.map(({ id, author, content }) => (<li key={id}>
-                    <p>{author}</p>
-                    <p>{content}</p>
-                </li> ))}
-            </ul>
+            {isNoReviews && <Box as='p' display='flex' justifyContent='center' pt='32px'>Ooops...There is no reviews yet</Box>}
+            {isReviews &&
+                <Box as='ul' pt='32px'>
+                    {review.map(({ id, author, content }) => (
+                        <ReviewItem key={id}>
+                            <Box as='h4' mb='16px'>Autor: {author}</Box>
+                            <p>{content}</p>
+                        </ReviewItem> ))}
+                </Box>}
         </>
     )
 }
+
+export default Reviews;

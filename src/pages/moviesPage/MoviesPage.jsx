@@ -1,11 +1,16 @@
-import { Searchbar } from "components/searchbar/Seatchbar"
+import { Searchbar } from "components/searchbar/Searchbar"
 import { useState,useEffect } from "react"
 import { useSearchParams } from "react-router-dom";
 import { getSearchFilms } from "services/filmApi"
 import { TrandingList } from "components/trandingList/TrandingList";
 import { Loader } from "components/loader/Loader";
 
-export const MoviesPage = () => {
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { Box } from "Box";
+
+const MoviesPage = () => {
 
     const [movies, setMovies] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams();
@@ -34,6 +39,12 @@ export const MoviesPage = () => {
             try {
 
                 const data = await getSearchFilms(queryString);
+
+                if (data.length === 0) {
+                    setMovies([])
+                    return toast.error('Try to find something else...');
+                }
+
                 setMovies(data);
                 
             } catch (error) {
@@ -49,7 +60,8 @@ export const MoviesPage = () => {
 
 
     return (
-        <>
+        <Box p='32px' pt='0'>
+
             {loading && <Loader />}
             
             {error && <div>Something went wrong...</div>}
@@ -57,6 +69,9 @@ export const MoviesPage = () => {
             <Searchbar value={queryString} onSubmit={updateQueryString} />
             
             <TrandingList data={movies} />
-        </>
+
+        </Box>
     )
 }
+
+export default MoviesPage;
