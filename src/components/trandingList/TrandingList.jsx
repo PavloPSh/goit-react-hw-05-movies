@@ -25,7 +25,7 @@ export const TrandingList = ({ data }) => {
                     </MovieItemInfo>
                     
                     
-                </MovieItem>))};
+                </MovieItem>))}
         </MovieList>
     );
 };

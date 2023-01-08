@@ -44,12 +44,13 @@ export const Searchbar = ({ value, onSubmit }) => {
                 />
                 
                 <SearchButton type="submit"><FcSearch size='24px'></FcSearch></SearchButton>
+                
             </Box>
         </>
     )
-};
+}
 
 Searchbar.propTypes = {
     onSubmit: PropTypes.func.isRequired,
-    value: PropTypes.string
+    value: PropTypes.string,
 }
