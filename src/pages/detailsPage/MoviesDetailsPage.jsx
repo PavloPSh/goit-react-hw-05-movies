@@ -53,7 +53,6 @@ const MoviesDetailsPage = () => {
     const isGenres = genres !== undefined;
     const isHasInfo = state.length !== 0 && !error && !loading;
     
-    console.log(state)
 
     const backLink = location.state?.from ?? '/movies';
     

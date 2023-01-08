@@ -33,7 +33,7 @@ const Cast = () => {
     }, [movieId]);
 
     const isCast = cast.length !== 0;
-    const isNoCast = cast.length === 0 && error && !loading;
+    const isNoCast = cast.length === 0 && !error && !loading;
 
     return (
         <>

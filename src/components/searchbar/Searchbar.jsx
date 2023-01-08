@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useState } from "react";
+import PropTypes from 'prop-types';
 
 import { FcSearch } from "react-icons/fc";
 
@@ -8,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Box } from "Box";
 import { SearchButton,SearchInput } from "./SearchBar.styled";
 
-export const Searchbar = ({value, onSubmit}) => {
+export const Searchbar = ({ value, onSubmit }) => {
 
     const [search, setSearch] = useState(value);
 
@@ -21,15 +22,15 @@ export const Searchbar = ({value, onSubmit}) => {
         
         e.preventDefault();
 
-            if (search.trim() === '') {
-                return toast.error('Try to find something...');
-            };
+        if (search.trim() === '') {
+            return toast.error('Try to find something...');
+        };
 
         onSubmit(search.trim());
     }
 
 
-    return(
+    return (
         <>
             <Box as='form' pt='32px' display='flex' justifyContent='center' onSubmit={handleSubmit}>
                 <SearchInput
@@ -40,10 +41,15 @@ export const Searchbar = ({value, onSubmit}) => {
                     type="text"
                     autoComplete='off'
                     autoFocus
-                    />
+                />
                 
                 <SearchButton type="submit"><FcSearch size='24px'></FcSearch></SearchButton>
             </Box>
         </>
     )
+};
+
+Searchbar.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    value: PropTypes.string
 }

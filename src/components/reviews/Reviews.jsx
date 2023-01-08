@@ -36,10 +36,9 @@ const Reviews = () => {
 
     }, [movieId]);
 
-    console.log(review);
 
     const isReviews = review.length !== 0;
-    const isNoReviews = review.length === 0 && error && !loading;
+    const isNoReviews = review.length === 0 && !error && !loading;
 
     return (
         <>
